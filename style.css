@@ -202,6 +202,10 @@ body {
   border: 1px solid var(--purplish-blue);
 }
 
+input:hover {
+  cursor: pointer;
+}
+
 .next-stp {
   align-self: flex-end;
   padding: 1.2rem 1.6rem;
@@ -215,4 +219,8 @@ body {
 .next-stp:hover {
   background-color: var(--purplish-blue);
   cursor: pointer;
+}
+
+.hidden {
+  display: none;
 }

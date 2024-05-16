@@ -18,36 +18,55 @@ inputArea.addEventListener("click", function (e) {
   });
 });
 
+////////////////////////////////////////
+const phone = phoneInp.value;
+const email = emailInp.value;
+const name = nameInp.value;
+
+inputs.forEach((input) => {
+  input.addEventListener("change", function () {
+    input.classList.remove("error");
+    input
+      .closest(".input-top__input")
+      .querySelector(".error-message")
+      .classList.remove("error");
+  });
+});
+
 nextStepBtns.forEach((cur) =>
   cur.addEventListener("click", function (e) {
+    const phone = phoneInp.value;
+    const email = emailInp.value;
+    const name = nameInp.value;
+
     const currNextBtn = e.target;
+    if (!currNextBtn) return;
     if (currNextBtn.classList.contains("next-stp1")) {
-      const fields = [
-        { input: nameInp, value: nameInp.value },
-        { input: emailInp, value: emailInp.value },
-        { input: phoneInp, value: phoneInp.value },
-      ];
-      if (!currNextBtn) return;
-
-      let anyFieldNotEmpty = false;
-
-      fields.forEach((field) => {
-        const { input, value } = field;
-        const parentDiv = input.closest(".input-top__input");
-        const errorElement = parentDiv.querySelector(".error-message");
-        if (value !== "") {
-          input.classList.remove("error");
-          if (errorElement) {
-            errorElement.classList.remove("error");
-          }
-          anyFieldNotEmpty = true;
-        } else {
-          input.classList.add("error");
-          if (errorElement) {
-            errorElement.classList.add("error");
-          }
+      if (phone !== "" && email !== "" && name !== "") {
+        step1.classList.add("hidden");
+      } else {
+        if (phone === "") {
+          phoneInp.classList.add("error");
+          phoneInp
+            .closest(".input-top__input")
+            .querySelector(".error-message")
+            .classList.add("error");
         }
-      });
+        if (email === "") {
+          emailInp.classList.add("error");
+          emailInp
+            .closest(".input-top__input")
+            .querySelector(".error-message")
+            .classList.add("error");
+        }
+        if (name === "") {
+          nameInp.classList.add("error");
+          nameInp
+            .closest(".input-top__input")
+            .querySelector(".error-message")
+            .classList.add("error");
+        }
+      }
     }
   })
 );
