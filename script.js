@@ -8,6 +8,7 @@ const emailInp = document.querySelector("#emailinp");
 const phoneInp = document.querySelector("#phoneinp");
 const errorAreas = document.querySelectorAll(".error-message");
 const step1 = document.querySelector(".step1");
+const numbers = document.querySelectorAll(".number");
 
 inputArea.addEventListener("click", function (e) {
   const curInp = e.target.closest(".input");
@@ -18,7 +19,6 @@ inputArea.addEventListener("click", function (e) {
   });
 });
 
-////////////////////////////////////////
 const phone = phoneInp.value;
 const email = emailInp.value;
 const name = nameInp.value;
@@ -40,10 +40,19 @@ nextStepBtns.forEach((cur) =>
     const name = nameInp.value;
 
     const currNextBtn = e.target;
+
     if (!currNextBtn) return;
     if (currNextBtn.classList.contains("next-stp1")) {
       if (phone !== "" && email !== "" && name !== "") {
         step1.classList.add("hidden");
+        for (let i = 0; i < numbers.length; i++) {
+          let mov = numbers[i];
+          if (mov.textContent === "1" && mov.classList.contains("active")) {
+            if (i + 1 < numbers.length) {
+              changeActiveCircle(mov, numbers[i + 1]);
+            }
+          }
+        }
       } else {
         if (phone === "") {
           phoneInp.classList.add("error");
@@ -70,3 +79,8 @@ nextStepBtns.forEach((cur) =>
     }
   })
 );
+
+function changeActiveCircle(currStep, nextStep) {
+  currStep.classList.remove("active");
+  nextStep.classList.add("active");
+}
