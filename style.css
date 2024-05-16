@@ -226,3 +226,7 @@ input:hover {
 .hidden {
   display: none;
 }
+
+.btns {
+  align-self: flex-end;
+}
